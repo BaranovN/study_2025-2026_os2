@@ -1,0 +1,126 @@
+---
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 6"
+subtitle: "Управление процессами в ОС Linux"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Получить навыки управления процессами операционной системы.
+
+# Задание
+
+1. Управление заданиями ОС.  
+2. Управление процессами ОС.  
+3. Задания для самостоятельной работы.  
+
+# Запуск процессов sleep и dd
+
+![](image/1.png){width=100%}
+
+# Приостановка процесса и проверка jobs
+
+![](image/1.png){width=100%}
+
+# Возобновление процесса в фоне
+
+![](image/1.png){width=100%}
+
+# Завершение процессов
+
+![](image/1.png){width=100%}
+
+# Запуск dd и выход из терминала
+
+![](image/2.png){width=100%}
+
+# Мониторинг процессов в top
+
+![](image/3.png){width=100%}
+
+# Изменение приоритета процесса
+
+![](image/4.png){width=100%}
+
+# Просмотр иерархии процессов и завершение
+
+![](image/5.png){width=100%}
+
+# Работа с программой yes
+
+![](image/7.png){width=100%}
+
+# Управление заданиями yes (1)
+
+![](image/9.png){width=100%}
+
+# Управление заданиями yes (2)
+
+![](image/10.png){width=100%}
+
+# Мониторинг процессов yes в top
+
+![](image/11.png){width=100%}
+
+# Попытка завершения процессов
+
+![](image/12.png){width=100%}
+
+# Завершение процессов killall
+
+![](image/13.png){width=100%}
+
+# Сравнение приоритетов процессов
+
+![](image/13.png){width=100%}
+
+# Изменение приоритета renice
+
+![](image/13.png){width=100%}
+
+# Выводы
+
+Получены навыки управления процессами в ОС Linux.
+

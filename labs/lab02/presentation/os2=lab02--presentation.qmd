@@ -1,0 +1,125 @@
+---
+# Preamble
+
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 2"
+subtitle: "Учётные записи пользователей и группы в Linux"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+## Докладчик
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Определяем учетную запись
+
+![who am i, id](image/1.png){width=100%}
+
+# Суперпользователь root
+
+![su + id](image/2.png){width=100%}
+
+# Просмотр sudoers
+
+![Просмотр файла](image/3.png){width=100%}
+
+# Права группы wheel
+
+![ищем wheel ALL=(ALL) ALL](image/4.png){width=100%}
+
+# Создание пользователя alice
+
+![useradd + id](image/5.png){width=100%}
+
+# Пароль для alice
+
+![passwd](image/6.png){width=100%}
+
+# Переключение на alice
+
+![su alice](image/7.png){width=100%}
+
+# Создание пользователя bob
+
+![useradd + id](image/8.png){width=100%}
+
+# Редактирование login.defs
+
+![vim /etc/login.defs](image/9.png){width=100%}
+
+# Создание каталогов
+
+![cd + mkdir](image/10.png){width=100%}
+
+# Редактирование bashrc
+
+![bashrc](image/12.png){width=100%}
+
+# Создание пользователя carol
+
+![useradd + passwd](image/13.png){width=100%}
+
+# Проверка каталогов carol
+
+![id + ls](image/14.png){width=100%}
+
+# Пароль carol
+
+![sudo cat /etc/shadow | grep carol](image/15.png){width=100%}
+
+# Изменения в пароле carol
+
+![sudo cat /etc/shadow | grep carol](image/16.png){width=100%}
+
+# Создание групп main и third
+
+![sudo cat /etc/shadow | grep carol, groupadd, usermod](image/17.png){width=100%}
+
+# Проверка добавления пользователей в группы
+
+![id](image/18.png){width=100%}
+
+# Выводы
+
+Мы получили представление о работе с учётными записями пользователей и группами пользователей в Linux.
+
+

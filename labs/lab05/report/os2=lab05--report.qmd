@@ -1,0 +1,126 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Баранов Никита Дмитриевич
+## Title
+title: "Отчёт о лабораторной работе"
+subtitle: "Лабораторная работа 5"
+license: "CC BY"
+## Generic options
+lang: ru-RU
+number-sections: true
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+## Crossref customization
+crossref:
+  lof-title: "Список иллюстраций"
+  lot-title: "Список таблиц"
+  lol-title: "Листинги"
+## Formats
+format:
+### Pdf output format
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    lof: true
+    lot: true
+#### Document
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+#### Misc options
+    indent: true
+    header-includes: |
+      \usepackage{indentfirst}
+      \usepackage{float}
+      \floatplacement{figure}{H}
+### Docx output format
+  docx:
+    toc: true
+    number-sections: true
+    toc-depth: 2
+---
+
+# Цель работы
+
+Получить навыки управления системными службами операционной системы посредством systemd.
+
+# Задание
+
+1. Выполните основные операции по запуску (останову), определению статуса, добавлению (удалению) в автозапуск и пр. службы Very Secure FTP (раздел 5.4.1).
+2. Продемонстрируйте навыки по разрешению конфликтов юнитов для служб
+firewalld и iptables (раздел 5.4.2).
+3. Продемонстрируйте навыки работы с изолированными целями (разделы 5.4.3, 5.4.4).
+
+# Выполнение лабораторной работы
+
+## Установка и управление службой vsftpd
+
+Был выполнен переход в режим суперпользователя. Проверка статуса службы vsftpd показала, что служба не установлена в системе (рис. [-@fig:001]).
+
+![Проверка статуса vsftpd до установки](image/1.png){#fig:001 width=70%}
+
+Служба vsftpd была установлена с помощью команды `dnf -y install vsftpd`. После установки служба была запущена командой `systemctl start vsftpd` (рис. [-@fig:001]).
+
+Проверка статуса показала, что служба работает, но не активирована при перезагрузке системы. Служба была добавлена в автозагрузку с помощью `systemctl enable vsftpd`, а затем удалена из автозагрузки с помощью `systemctl disable vsftpd` (рис. [-@fig:001], [-@fig:002]).
+
+Были проверены символические ссылки в каталоге `/etc/systemd/system/multi-user.target.wants`. После повторного включения службы в автозагрузку была создана символическая ссылка на файл `/usr/lib/systemd/system/vsftpd.service` (рис. [-@fig:002]).
+
+![Управление автозагрузкой vsftpd](image/2.png){#fig:002 width=70%}
+
+## Исследование зависимостей служб
+
+С помощью команды `systemctl list-dependencies vsftpd` были просмотрены зависимости службы vsftpd. Команда показала, что vsftpd зависит от различных системных юнитов и целевых уровней (рис. [-@fig:002]).
+
+Обратная проверка зависимостей с флагом `--reverse` показала, что vsftpd требуется для multi-user.target и graphical.target (рис. [-@fig:003]).
+
+![Зависимости служб](image/3.png){#fig:003 width=70%}
+
+## Разрешение конфликтов между firewall-службами
+
+Были установлены дополнительные пакеты iptables с помощью команды `dnf -y install iptables\*` (рис. [-@fig:004]).
+
+![Установка iptables](image/4.png){#fig:004 width=70%}
+
+Был проверен статус firewalld (активен) и iptables (неактивен). При попытке запуска обеих служб было обнаружено, что они конфликтуют между собой (рис. [-@fig:005]).
+
+Изучение файла `/usr/lib/systemd/system/firewalld.service` показало наличие строки `Conflicts=iptables.service ip6tables.service ebtables.service ipset.service`, что подтверждает конфликт между службами (рис. [-@fig:005]).
+
+![Анализ конфликтующих служб](image/5.png){#fig:005 width=70%}
+
+Служба iptables была остановлена, а firewalld запущена. Для предотвращения случайного запуска iptables служба была заблокирована с помощью `systemctl mask iptables` (рис. [-@fig:006]).
+
+После блокировки попытки запуска или включения в автозагрузку службы iptables завершались ошибкой, указывающей на то, что служба замаскирована.
+
+![Блокировка iptables](image/6.png){#fig:006 width=70%}
+
+## Работа с изолируемыми целями
+
+Был выполнен переход в каталог `/usr/lib/systemd/system` и с помощью команды `grep Isolate *.target` найдены все цели, которые поддерживают изоляцию (рис. [-@fig:007]).
+
+Была выполнена команда перехода в режим восстановления: `systemctl isolate rescue.target`, который соответствует runlevel 1 в SystemV init (рис. [-@fig:007]).
+
+![Изолируемые цели systemd](image/7.png){#fig:007 width=70%}
+
+## Изменение целевого уровня по умолчанию
+
+Была проверена текущая цель по умолчанию с помощью `systemctl get-default`, которая оказалась `graphical.target` (соответствует runlevel 5). 
+
+Цель по умолчанию была изменена на `multi-user.target` (соответствует runlevel 3) с помощью `systemctl set-default multi-user.target` (рис. [-@fig:008]).
+
+После изменения была выполнена перезагрузка системы для применения изменений.
+
+![Изменение целевого уровня по умолчанию](image/8.png){#fig:008 width=70%}
+
+# Выводы
+
+Мы получили навыки управления системными службами операционной системы посредством systemd.

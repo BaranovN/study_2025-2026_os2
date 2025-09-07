@@ -1,0 +1,143 @@
+---
+# Preamble
+
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 4"
+subtitle: "Работа с пакетами и репозиториями в Linux"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Получить навыки работы с репозиториями и менеджерами пакетов.
+
+# Задание
+
+1. Работа с `dnf` и репозиториями.  
+2. Установка, удаление и информация о пакетах.  
+3. Работа с группами пакетов.  
+4. История операций и отмена действий.  
+5. Ручная установка пакетов через `rpm`.  
+6. Анализ файлов, конфигов и скриптов пакетов.  
+
+# Просмотр репозиториев
+
+![](image/1.png){width=100%}
+
+# Список активных репозиториев
+
+![](image/2.png){width=100%}
+
+# Поиск пакетов со словом "user" (часть 1)
+
+![](image/2.png){width=100%}
+
+# Поиск пакетов со словом "user" (часть 2)
+
+![](image/3.png){width=100%}
+
+# Установка пакета nmap
+
+![](image/4.png){width=100%}
+
+# Удаление пакета nmap
+
+![](image/5.png){width=100%}
+
+# Список групп пакетов
+
+![](image/6.png){width=100%}
+
+# Установка группы RPM Development Tools
+
+![](image/7.png){width=100%}
+
+# История операций DNF
+
+![](image/8.png){width=100%}
+
+# Загрузка пакета lynx
+
+![](image/9.png){width=100%}
+
+# Ручная установка lynx через rpm
+
+![](image/10.png){width=100%}
+
+# Список файлов пакета lynx (часть 1)
+
+![](image/11.png){width=100%}
+
+# Список файлов пакета lynx (часть 2)
+
+![](image/14.png){width=100%}
+
+# Руководство и документация lynx
+
+![](image/13.png){width=100%}
+
+# Конфигурационные файлы lynx
+
+![](image/15.png){width=100%}
+
+# Установка и проверка dnsmasq
+
+![](image/16.png){width=100%}
+
+# Файлы пакета dnsmasq
+
+![](image/17.png){width=100%}
+
+# Документация и конфиги dnsmasq
+
+![](image/19.png){width=100%}
+
+# Скрипты установки и удаления dnsmasq
+
+![](image/19.png){width=100%}
+
+# Выводы
+
+Получены навыки работы с пакетами и репозиториями Linux.
+

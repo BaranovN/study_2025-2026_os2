@@ -1,0 +1,99 @@
+---
+# Preamble
+
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 3"
+subtitle: "Права доступа в Linux"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Настройка базовых и специальных прав доступа для групп пользователей.
+
+# Задание
+
+Выполнить задания, прописанные в файле.
+
+# Создание каталогов и изменение владельцев
+
+![Выполняем все перечисленные действия](image/1.png){width=100%}
+
+# Проверка прав пользователя bob
+
+![Выполняем все перечисленные действия](image/2.png){width=100%}
+
+# Создание файлов пользователем alice
+
+![Создаем файлы alice1,2](image/3.png){width=100%}
+
+# Создание файлов пользователем bob и проверка
+
+![Выполняем все перечисленные действия](image/4.png){width=100%}
+
+# Установка SGID и sticky-бита
+
+![Устанавливаем бит идентификатора группы](image/10.png){width=100%}
+
+# Попытка удаления чужих файлов
+
+![Создаем файлы и пытаемся удалить файлы боба](image/5.png){width=100%}
+
+# Настройка ACL для каталогов
+
+![Выполняем все действия](image/6.png){width=100%}
+
+![Выполняем все действия](image/7.png){width=100%}
+
+# Проверка ACL пользователем группы third
+
+![Заходим под carol и проверяем операции с файлами](image/8.png){width=100%}
+
+![Мы смогли записать изменения в файл](image/9.png){width=100%}
+
+# Выводы
+
+Получены навыки настройки базовых и специальных прав доступа для групп пользователей в Linux.
+
+

@@ -1,0 +1,101 @@
+---
+# Preamble
+
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 5"
+subtitle: "Управление системными службами через systemd"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Получить навыки управления системными службами операционной системы посредством systemd.
+
+# Задание
+
+1. Управление службой vsftpd.  
+2. Разрешение конфликтов firewalld и iptables.  
+3. Работа с изолированными целями systemd.  
+4. Изменение целевого уровня по умолчанию.  
+
+# Проверка статуса vsftpd до установки
+
+![](image/1.png){width=100%}
+
+# Установка и запуск vsftpd
+
+![](image/2.png){width=100%}
+
+# Зависимости службы vsftpd
+
+![](image/3.png){width=100%}
+
+# Установка пакета iptables
+
+![](image/4.png){width=100%}
+
+# Конфликт firewalld и iptables
+
+![](image/5.png){width=100%}
+
+# Блокировка службы iptables
+
+![](image/6.png){width=100%}
+
+# Поиск изолируемых целей
+
+![](image/7.png){width=100%}
+
+# Изоляция rescue.target
+
+![](image/7.png){width=100%}
+
+# Изменение целевого уровня по умолчанию
+
+![](image/8.png){width=100%}
+
+# Выводы
+
+Получены навыки управления системными службами посредством systemd.
+
