@@ -1,0 +1,140 @@
+---
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 12"
+subtitle: "Настройки сети в Linux"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Получить навыки настройки сетевых параметров системы.
+
+# Задание
+
+1. Использование утилиты **ip**  
+2. Использование утилиты **nmcli**  
+3. Работа с **nmtui**  
+
+# Информация о сетевых интерфейсах
+
+![](image/1.png){width=100%}
+
+# Таблица маршрутизации
+
+![](image/1.png){width=100%}
+
+# Назначенные IP-адреса
+
+![](image/2.png){width=100%}
+
+# Проверка соединения (ping)
+
+![](image/1.png){width=100%}
+
+# Добавление IP-адреса
+
+![](image/1.png){width=100%}
+
+# Проверка добавленного адреса
+
+![](image/2.png){width=100%}
+
+# Сравнение ip и ifconfig
+
+![](image/2.png){width=100%}
+
+# Список открытых портов
+
+![](image/2.png){width=100%}
+
+# Текущие соединения (nmcli)
+
+![](image/3.png){width=100%}
+
+# Создание соединения DHCP
+
+![](image/3.png){width=100%}
+
+# Создание статического соединения
+
+![](image/3.png){width=100%}
+
+# Активация статического соединения
+
+![](image/3.png){width=100%}
+
+# Возврат к DHCP соединению
+
+![](image/3.png){width=100%}
+
+# Настройка DNS и автоподключения
+
+![](image/4.png){width=100%}
+
+# Изменение IP-адресов
+
+![](image/4.png){width=100%}
+
+# Активация измененного соединения
+
+![](image/4.png){width=100%}
+
+# Интерфейс nmtui
+
+![](image/5.png){width=100%}
+
+# Графические настройки сети
+
+![](image/6.png){width=100%}
+
+# Возврат к первоначальному соединению
+
+![](image/7.png){width=100%}
+
+# Выводы
+
+* Получены навыки работы с утилитой **ip**  
+* Освоена настройка сетевых параметров через **nmcli**  
+* Изучена работа с **nmtui**  
+

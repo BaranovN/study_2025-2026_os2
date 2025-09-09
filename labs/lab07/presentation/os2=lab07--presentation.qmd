@@ -1,0 +1,153 @@
+---
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 7"
+subtitle: "Управление журналами операционной системы"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Получить навыки работы с журналами мониторинга различных событий в системе.
+
+# Задание
+
+1. Работа с журналом мониторинга событий в реальном времени  
+2. Создание и настройка конфигурации мониторинга веб-службы  
+3. Работа с journalctl  
+4. Работа с journald  
+
+# Получение прав администратора
+
+![](image/1.png){width=100%}
+
+# Мониторинг системных событий
+
+![](image/2.png){width=100%}
+
+# Ошибочный вход и logger
+
+![](image/3.png){width=100%}
+
+# Просмотр логов безопасности
+
+![](image/2.png){width=100%}
+
+# Установка Apache
+
+![](image/4.png){width=100%}
+
+# Запуск Apache
+
+![](image/5.png){width=100%}
+
+# Просмотр error_log Apache
+
+![](image/6.png){width=100%}
+
+# Настройка ErrorLog в httpd.conf
+
+![](image/7.png){width=100%}
+
+# Создание конфигурации rsyslog
+
+![](image/8.png){width=100%}
+
+# Настройка правил local1
+
+![](image/9.png){width=100%}
+
+# Перезапуск служб
+
+![](image/10.png){width=100%}
+
+# Создание debug.conf
+
+![](image/11.png){width=100%}
+
+# Тестирование debug-сообщений
+
+![](image/12.png){width=100%}
+
+# journalctl: просмотр журнала
+
+![](image/13.png){width=100%}
+
+# journalctl: просмотр полей
+
+![](image/14.png){width=100%}
+
+# journalctl: фильтрация по UID
+
+![](image/15.png){width=100%}
+
+# journalctl: последние записи
+
+![](image/16.png){width=100%}
+
+# journalctl: просмотр ошибок
+
+![](image/17.png){width=100%}
+
+# journalctl: фильтрация по времени
+
+![](image/18.png){width=100%}
+
+# journalctl: вывод по службе
+
+![](image/19.png){width=100%}
+
+# Постоянное хранение журналов
+
+![](image/20.png){width=100%}
+
+# Проверка работы хранения
+
+![](image/20.png){width=100%}
+
+# Выводы
+
+Получены навыки работы с системными журналами ОС Linux.  
+Настроена регистрация сообщений Apache через syslog, добавлены правила для отладки, изучена работа journalctl и journald.  
+Реализовано постоянное хранение журналов в /var/log/journal.
+

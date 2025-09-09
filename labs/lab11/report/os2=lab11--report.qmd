@@ -1,0 +1,149 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Баранов Никита Дмитриевич
+## Title
+title: "Отчёт о лабораторной работе"
+subtitle: "Лабораторная работа 12. Управление загрузкой системы"
+license: "CC BY"
+## Generic options
+lang: ru-RU
+number-sections: true
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+## Crossref customization
+crossref:
+  lof-title: "Список иллюстраций"
+  lot-title: "Список таблиц"
+  lol-title: "Листинги"
+## Bibliography
+bibliography:
+  - bib/cite.bib
+csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
+## Formats
+format:
+### Pdf output format
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    lof: true # List of figures
+    lot: true # List of tables
+#### Document
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+#### Biblatex
+    cite-method: biblatex
+    biblio-style: gost-numeric
+    biblatexoptions:
+      - backend=biber
+      - langhook=extras
+      - autolang=other*
+#### Misc options
+    csquotes: true
+    indent: true
+    header-includes: |
+      \usepackage{indentfirst}
+      \usepackage{float}
+      \floatplacement{figure}{H}
+### Docx output format
+  docx:
+    toc: true
+    number-sections: true
+    toc-depth: 2
+---
+
+# Цель работы
+
+Получить навыки работы с загрузчиком системы GRUB2.
+
+# Задание
+
+1. Продемонстрируйте навыки по изменению параметров GRUB и записи изменений
+в файл конфигурации (см. раздел 11.4.1).
+2. Продемонстрируйте навыки устранения неполадок при работе с GRUB (см. раздел 11.4.2).
+3. Продемонстрируйте навыки работы с GRUB без использования root (см. раздел 11.4.3).
+
+# Выполнение лабораторной работы
+
+## Настройка загрузчика GRUB2
+
+Получаем полномочия администратора и редактируем конфигурационный файл GRUB (рис. [-@fig:001], [-@fig:002]).
+
+![Редактирование /etc/default/grub](image/1.png){#fig:001 width=70%}
+![Содержимое файла /etc/default/grub](image/2.png){#fig:002 width=70%}
+
+Устанавливаем параметр `GRUB_TIMEOUT=10` для отображения меню загрузки в течение 10 секунд.
+
+Применяем изменения конфигурации GRUB2 (рис. [-@fig:003]).
+
+![Применение изменений GRUB2](image/3.png){#fig:003 width=70%}
+
+После перезагрузки наблюдаем процесс загрузки с отображением загрузочных сообщений (рис. [-@fig:004]).
+
+![Процесс загрузки системы](image/4.jpg){#fig:004 width=70%}
+
+## Работа с режимом rescue
+
+При загрузке системы редактируем параметры ядра, добавляя `systemd.unit=rescue.target` и удаляя параметры `rhgb quiet` (рис. [-@fig:004]).
+
+![Редактирование параметров ядра для rescue mode](image/4.jpg){#fig:004 width=70%}
+
+После загрузки в режиме rescue наблюдаем предупреждения системы (рис. [-@fig:005]).
+
+![Предупреждения системы в rescue mode](image/5.jpg){#fig:005 width=70%}
+
+![Смотрим все модули](image/6.jpg){#fig:005 width=70%}
+
+Просматриваем список загруженных модулей системы (рис. [-@fig:007], [-@fig:008]).
+
+![Просмотр системного окружения](image/7.jpg){#fig:007 width=70%}
+![Список загруженных модулей системы](image/8.jpg){#fig:008 width=70%}
+
+## Работа с режимом emergency
+
+Повторно редактируем параметры ядра, добавляя `systemd.unit=emergency.target` (рис. [-@fig:009]).
+
+![Редактирование параметров ядра для emergency mode](image/9.jpg){#fig:009 width=70%}
+
+В режиме emergency выполняем восстановление системы, включая смену пароля root и восстановление контекстов SELinux (рис. [-@fig:009]).
+
+![Восстановление системы в emergency mode](image/9.jpg){#fig:009 width=70%}
+
+**Выполненные действия в emergency mode:**
+1. Перемонтирование файловой системы в режим чтения-записи: `mount -o remount,rw /sysroot`
+2. Смена корневого каталога: `chroot /sysroot`
+3. Смена пароля root: `passwd`
+4. Загрузка политики SELinux: `load_policy -i`
+5. Восстановление контекста безопасности: `chcon -t shadow_t /etc/shadow`
+
+## Восстановление пароля root
+
+Используем параметр `rd.break` для остановки загрузки на раннем этапе (рис. [-@fig:009]).
+
+![Использование rd.break для восстановления пароля](image/9.jpg){#fig:009 width=70%}
+
+**Процесс восстановления пароля:**
+1. Остановка загрузки перед монтированием корневой файловой системы
+2. Перемонтирование системного образа в режим чтения-записи
+3. Смена корневого каталога
+4. Установка нового пароля для root
+5. Загрузка политики SELinux и восстановление контекстов безопасности
+
+# Выводы
+
+Мы получили навыки работы с загрузчиком системы GRUB2.
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::

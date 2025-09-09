@@ -1,0 +1,168 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Баранов Никита Дмитриевич
+## Title
+title: "Отчёт о лабораторной работе"
+subtitle: "Лабораторная работа 10.  Основы работы с модулями ядра операционной системы"
+license: "CC BY"
+## Generic options
+lang: ru-RU
+number-sections: true
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+## Crossref customization
+crossref:
+  lof-title: "Список иллюстраций"
+  lot-title: "Список таблиц"
+  lol-title: "Листинги"
+## Bibliography
+bibliography:
+  - bib/cite.bib
+csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
+## Formats
+format:
+### Pdf output format
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    lof: true # List of figures
+    lot: true # List of tables
+#### Document
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+#### Biblatex
+    cite-method: biblatex
+    biblio-style: gost-numeric
+    biblatexoptions:
+      - backend=biber
+      - langhook=extras
+      - autolang=other*
+#### Misc options
+    csquotes: true
+    indent: true
+    header-includes: |
+      \usepackage{indentfirst}
+      \usepackage{float}
+      \floatplacement{figure}{H}
+### Docx output format
+  docx:
+    toc: true
+    number-sections: true
+    toc-depth: 2
+---
+
+# Цель работы
+
+Получить навыки работы с утилитами управления модулями ядра операционной системы.
+
+
+# Задание
+
+1. Продемонстрируйте навыки работы по управлению модулями ядра (см. раздел 10.4.1).
+2. Продемонстрируйте навыки работы по загрузке модулей ядра с параметрами (см.
+раздел 10.4.2).
+
+# Выполнение лабораторной работы
+
+## Работа с устройствами и модулями ядра
+
+Получаем полномочия администратора и просматриваем устройства системы с связанными модулями ядра (рис. [-@fig:001]).
+
+![Просмотр устройств системы](image/1.png){#fig:001 width=70%}
+
+**Информация об устройствах системы:**
+- `06:01.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE` - IDE контроллер с драйвером `ata_piix`
+- `06:02.0 VGA compatible controller: VMware SVGA II Adapter` - видеоконтроллер VMware с драйвером `vmwgfx`
+- `06:03.0 Ethernet controller: Intel Corporation 82540EM` - сетевой контроллер с драйвером `e1000`
+- `06:04.0 System peripheral: VirtualBox Guest Service` - службы гостевой ОС VirtualBox с драйвером `vboxguest`
+- `06:05.0 Multimedia audio controller: Intel Corporation 82801AA` - аудиоконтроллер с драйвером `snd_intel8x0`
+- `06:06.0 USB controller: Apple Inc. KeyLarge/Intrepid USB` - USB контроллер с драйвером `ohci-pci`
+- `06:07.0 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI` - мост с драйвером `piix4_smbus`
+- `06:08.0 USB controller: Intel Corporation 82801FB` - USB2 контроллер с драйвером `ehci-pci`
+- `06:09.0 SATA controller: Intel Corporation 82801HM` - SATA контроллер с драйвером `ahci`
+
+Просматриваем загруженные модули ядра (рис. [-@fig:001]).
+
+![Просмотр загруженных модулей ядра](image/1.png){#fig:001 width=70%}
+
+Проверяем наличие модуля ext4 и загружаем его (рис. [-@fig:002]).
+
+![Проверка и загрузка модуля ext4](image/2.png){#fig:002 width=70%}
+
+Просматриваем информацию о модуле ext4 (рис. [-@fig:002], [-@fig:003]).
+
+![Информация о модуле ext4](image/2.png){#fig:002 width=70%}
+![Детальная информация о модуле ext4](image/3.png){#fig:003 width=70%}
+
+**Информация о модуле ext4:**
+- `filename` - путь к файлу модуля
+- `description` - описание: Fourth Extended Filesystem
+- `author` - авторы файловой системы
+- `license` - лицензия: GPL
+- `depends` - зависимости: jbd2, mbcache
+- `vermagic` - версия ядра, для которой скомпилирован модуль
+- `alias` - псевдонимы модуля (поддержка ext3, ext2)
+
+Пытаемся выгрузить модуль ext4 (рис. [-@fig:003]).
+
+![Попытка выгрузки модуля ext4](image/3.png){#fig:003 width=70%}
+
+**Реакция системы:** При попытке выгрузки модуля ext4 система сообщает, что модуль `crc32c_intel` используется, что препятствует выгрузке ext4. После нескольких попыток модуль удается выгрузить.
+
+Пытаемся выгрузить модуль xfs (рис. [-@fig:003]).
+
+![Попытка выгрузки модуля xfs](image/3.png){#fig:003 width=70%}
+
+**Реакция системы:** Система сообщает об ошибке - модуль xfs используется и не может быть выгружен.
+
+## Работа с модулем bluetooth
+
+Проверяем и загружаем модуль bluetooth (рис. [-@fig:004]).
+
+![Работа с модулем bluetooth](image/4.png){#fig:004 width=70%}
+
+Просматриваем информацию о модуле bluetooth (рис. [-@fig:004]).
+
+![Информация о модуле bluetooth](image/4.png){#fig:004 width=70%}
+
+**Параметры модуля bluetooth:**
+- `disable_esco` - отключение создания eSCO соединений (bool)
+- `disable_ertm` - отключение расширенного режима повторной передачи (bool)
+- `enable_ecred` - включение расширенного управления потоком кредитов (bool)
+
+Выгружаем модуль bluetooth (рис. [-@fig:004]).
+
+![Выгрузка модуля bluetooth](image/4.png){#fig:004 width=70%}
+
+## Обновление ядра операционной системы
+
+Проверяем текущую версию ядра и информацию о системе (рис. [-@fig:005], [-@fig:006]).
+
+![Проверка версии ядра](image/5.png){#fig:005 width=70%}
+![Информация о системе hostnamectl](image/6.png){#fig:006 width=70%}
+
+Просматриваем список пакетов ядра и проверяем обновления (рис. [-@fig:005]).
+
+![Проверка пакетов ядра и обновлений](image/5.png){#fig:005 width=70%}
+
+**Результат проверки обновлений:** Система сообщает, что все пакеты уже обновлены и ничего не требуется делать.
+
+# Выводы
+
+Мы получили навыки работы с утилитами управления модулями ядра операционной системы.
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::

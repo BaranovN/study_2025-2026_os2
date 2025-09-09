@@ -1,0 +1,170 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Баранов Никита Дмитриевич
+## Title
+title: "Отчёт о лабораторной работе"
+subtitle: "Лабораторная работа 8.  Планировщики событий"
+license: "CC BY"
+## Generic options
+lang: ru-RU
+number-sections: true
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+## Crossref customization
+crossref:
+  lof-title: "Список иллюстраций"
+  lot-title: "Список таблиц"
+  lol-title: "Листинги"
+## Bibliography
+bibliography:
+  - bib/cite.bib
+csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
+## Formats
+format:
+### Pdf output format
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    lof: true # List of figures
+    lot: true # List of tables
+#### Document
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+#### Biblatex
+    cite-method: biblatex
+    biblio-style: gost-numeric
+    biblatexoptions:
+      - backend=biber
+      - langhook=extras
+      - autolang=other*
+#### Misc options
+    csquotes: true
+    indent: true
+    header-includes: |
+      \usepackage{indentfirst}
+      \usepackage{float}
+      \floatplacement{figure}{H}
+### Docx output format
+  docx:
+    toc: true
+    number-sections: true
+    toc-depth: 2
+---
+
+# Цель работы
+
+Получение навыков работы с планировщиками событий cron и at.
+
+# Задание
+
+1. Выполните задания по планированию задач с помощью crond (см. раздел 8.4.1).
+2. Выполните задания по планированию задач с помощью atd (см. раздел 8.4.2).
+
+# Выполнение лабораторной работы
+
+## Работа с демоном crond
+
+Получаем полномочия администратора и проверяем статус демона crond (рис. [-@fig:001]).
+
+![Получение прав администратора и проверка статуса crond](image/1.png){#fig:001 width=70%}
+
+Просматриваем содержимое файла конфигурации /etc/crontab (рис. [-@fig:002]).
+
+![Просмотр /etc/crontab](image/2.png){#fig:002 width=70%}
+
+Проверяем список заданий в расписании пользователя root (рис. [-@fig:002]).
+
+![Проверка crontab -l](image/2.png){#fig:002 width=70%}
+
+## Создание задания через crontab
+
+Редактируем файл расписания пользователя root и добавляем задание (рис. [-@fig:003]).
+
+![Редактирование crontab](image/3.png){#fig:003 width=70%}
+
+**Синтаксис записи в crontab:** `*/1 * * * * logger This message is written from root cron`
+- `*/1` - выполнять каждую минуту
+- `*` - каждый час
+- `*` - каждый день месяца
+- `*` - каждый месяц
+- `*` - каждый день недели
+- Команда: запись сообщения в системный журнал через утилиту logger
+
+Проверяем добавленное задание (рис. [-@fig:004]).
+
+![Проверка добавленного задания](4.png){#fig:004 width=70%}
+
+Проверяем выполнение задания через просмотр журнала системных событий (рис. [-@fig:004]).
+
+![Проверка выполнения задания в журнале](image/4.png){#fig:004 width=70%}
+
+## Изменение задания в crontab
+
+Изменяем запись в расписании на: `0 */1 * * 1-5 logger This message is written from root cron` (рис. [-@fig:005]).
+
+![Изменение задания в crontab](image/5.png){#fig:005 width=70%}
+
+**Синтаксис изменённой записи:**
+- `0` - в 0 минут
+- `*/1` - каждый час
+- `*` - каждый день месяца
+- `*` - каждый месяц
+- `1-5` - с понедельника по пятницу
+- Команда: запись сообщения в системный журнал
+
+## Создание скрипта в /etc/cron.hourly
+
+Переходим в каталог /etc/cron.hourly и создаём исполняемый скрипт (рис. [-@fig:006], [-@fig:007]).
+
+![Создание файла eachhour в cron.hourly](image/6.png){#fig:006 width=70%}
+![Содержимое скрипта eachhour](image/7.png){#fig:007 width=70%}
+
+## Создание задания в /etc/cron.d
+
+Переходим в каталог /etc/cron.d и создаём файл с расписанием (рис. [-@fig:008], [-@fig:009]).
+
+![Работа в каталоге /etc/cron.d](image/8.png){#fig:008 width=70%}
+![Содержимое файла eachhour в /etc/cron.d](image/9.png){#fig:009 width=70%}
+
+**Синтаксис записи в /etc/cron.d:**
+- `11` - в 11 минут
+- `*` - каждый час
+- `*` - каждый день месяца
+- `*` - каждый месяц
+- `*` - каждый день недели
+- `root` - пользователь, от которого выполняется команда
+- Команда: запись сообщения в системный журнал
+
+## Работа с планировщиком at
+
+Проверяем статус службы atd (рис. [-@fig:011]).
+
+![Проверка статуса atd](image/11.png){#fig:011 width=70%}
+
+Создаём задание для выполнения в определённое время (рис. [-@fig:012]).
+
+![Создание задания через at](image/12.png){#fig:012 width=70%}
+
+Проверяем выполнение задания через просмотр журнала (рис. [-@fig:012]).
+
+![Проверка выполнения задания at](image/12.png){#fig:012 width=70%}
+
+# Выводы
+
+Мы получили навыки работы с планировщиками событий cron и at.
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::

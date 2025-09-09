@@ -1,0 +1,196 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Баранов Никита Дмитриевич
+## Title
+title: "Отчёт о лабораторной работе"
+subtitle: "Лабораторная работа 9. Управление SELinux"
+license: "CC BY"
+## Generic options
+lang: ru-RU
+number-sections: true
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+## Crossref customization
+crossref:
+  lof-title: "Список иллюстраций"
+  lot-title: "Список таблиц"
+  lol-title: "Листинги"
+## Bibliography
+bibliography:
+  - bib/cite.bib
+csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
+## Formats
+format:
+### Pdf output format
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    lof: true # List of figures
+    lot: true # List of tables
+#### Document
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+#### Biblatex
+    cite-method: biblatex
+    biblio-style: gost-numeric
+    biblatexoptions:
+      - backend=biber
+      - langhook=extras
+      - autolang=other*
+#### Misc options
+    csquotes: true
+    indent: true
+    header-includes: |
+      \usepackage{indentfirst}
+      \usepackage{float}
+      \floatplacement{figure}{H}
+### Docx output format
+  docx:
+    toc: true
+    number-sections: true
+    toc-depth: 2
+---
+
+# Цель работы
+
+Получить навыки работы с контекстом безопасности и политиками SELinux.
+
+# Задание
+
+1. Продемонстрируйте навыки по управлению режимами SELinux (см. раздел 9.4.1).
+2. Продемонстрируйте навыки по восстановлению контекста безопасности SELinux (см.
+раздел 9.4.2).
+3. Настройте контекст безопасности для нестандартного расположения файлов вебслужбы (см. раздел 9.4.3).
+4. Продемонстрируйте навыки работы с переключателями SELinux (см. раздел 9.4.4).
+
+# Выполнение лабораторной работы
+
+## Работа с режимами SELinux
+
+Получаем полномочия администратора и просматриваем текущую информацию о состоянии SELinux (рис. [-@fig:001]).
+
+![Просмотр статуса SELinux](image/1.png){#fig:001 width=70%}
+
+**Информация о состоянии SELinux:**
+- `SELinux status: enabled` - SELinux включен
+- `SELinuxfs mount: /sys/fs/selinux` - точка монтирования файловой системы SELinux
+- `SELinux root directory: /etc/selinux` - корневой каталог конфигурации SELinux
+- `Loaded policy name: targeted` - загружена политика targeted
+- `Current mode: enforcing` - текущий режим: принудительный
+- `Mode from config file: enforcing` - режим из конфигурационного файла: принудительный
+- `Policy MLS status: enabled` - поддержка многоуровневой безопасности включена
+- `Policy deny_unknown status: allowed` - политика разрешает неизвестные статусы
+- `Memory protection checking: actual (secure)` - проверка защиты памяти: актуальная (безопасная)
+
+Проверяем текущий режим работы SELinux (рис. [-@fig:001]).
+
+![Проверка режима getenforce](image/1.png){#fig:001 width=70%}
+
+Изменяем режим работы на разрешающий (Permissive) и проверяем (рис. [-@fig:001]).
+
+![Изменение режима на Permissive](image/1.png){#fig:001 width=70%}
+
+Редактируем конфигурационный файл для отключения SELinux (рис. [-@fig:002], [-@fig:003]).
+
+![Редактирование /etc/sysconfig/selinux](image/2.png){#fig:002 width=70%}
+![Установка SELINUX=disabled](image/3.png){#fig:003 width=70%}
+
+После перезагрузки проверяем статус SELinux (рис. [-@fig:003]).
+
+![Проверка статуса после отключения](image/3.png){#fig:003 width=70%}
+
+Пытаемся изменить режим работы SELinux при отключенном состоянии (рис. [-@fig:003]).
+
+![Попытка изменения режима при отключенном SELinux](image/3.png){#fig:003 width=70%}
+
+Восстанавливаем режим enforcing через конфигурационный файл (рис. [-@fig:004]).
+
+![Восстановление режима enforcing](image/4.png){#fig:004 width=70%}
+
+После перезагрузки проверяем статус SELinux (рис. [-@fig:005]).
+
+![Проверка статуса после восстановления](image/5.png){#fig:005 width=70%}
+
+## Работа с контекстами безопасности
+
+Просматриваем контекст безопасности файла /etc/hosts (рис. [-@fig:006]).
+
+![Контекст безопасности /etc/hosts](image/6.png){#fig:006 width=70%}
+
+Копируем файл и проверяем изменение контекста (рис. [-@fig:006]).
+
+![Копирование файла и проверка контекста](image/6.png){#fig:006 width=70%}
+
+Перезаписываем файл и проверяем контекст (рис. [-@fig:006]).
+
+![Перезапись файла и проверка контекста](image/6.png){#fig:006 width=70%}
+
+Восстанавливаем правильный контекст безопасности (рис. [-@fig:006]).
+
+![Восстановление контекста restorecon](image/6.png){#fig:006 width=70%}
+
+Создаем файл для массового восстановления контекстов (рис. [-@fig:006]).
+
+![Создание файла для массового восстановления](image/6.png){#fig:006 width=70%}
+
+## Настройка веб-сервера Apache с SELinux
+
+Устанавливаем необходимое программное обеспечение (рис. [-@fig:007]).
+
+![Установка httpd и lynx](image/7.png){#fig:007 width=70%}
+
+Создаем каталог для веб-сервера и файл index.html (рис. [-@fig:007], [-@fig:008]).
+
+![Создание каталога /web и файла index.html](7.png){#fig:007 width=70%}
+![Содержимое index.html](image/8.png){#fig:008 width=70%}
+
+Настраиваем конфигурационный файл Apache (рис. [-@fig:009]).
+
+![Настройка httpd.conf](image/9.png){#fig:009 width=70%}
+
+Запускаем и включаем веб-сервер (рис. [-@fig:010]).
+
+![Запуск и включение httpd](image/10.png){#fig:010 width=70%}
+
+Применяем правильный контекст безопасности для каталога /web (рис. [-@fig:012]).
+
+![Настройка контекста безопасности для /web](image/12.png){#fig:012 width=70%}
+
+Проверяем доступ к веб-странице (рис. [-@fig:013]).
+
+![Проверка доступа к веб-серверу](image/13.png){#fig:013 width=70%}
+
+## Управление переключателями SELinux для FTP
+
+Просматриваем переключатели SELinux для службы FTP (рис. [-@fig:014]).
+
+![Просмотр переключателей FTP](image/14.png){#fig:014 width=70%}
+
+Изменяем значение переключателя ftpd_anon_write (рис. [-@fig:014]).
+
+![Изменение переключателя ftpd_anon_write](image/14.png){#fig:014 width=70%}
+
+**Состояние переключателя ftpd_anon_write после изменения:**
+- Время выполнения: включен (on)
+- Постоянная настройка: включена (on)
+- Описание: Allow ftpd to anon write (Разрешить анонимную запись для ftpd)
+
+# Выводы
+
+Мы получили навыки работы с контекстом безопасности и политиками SELinux.
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::

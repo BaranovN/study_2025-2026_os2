@@ -1,0 +1,146 @@
+---
+author:
+  name: "Баранов Никита Дмитриевич"
+title: "Лабораторная работа 14"
+subtitle: "Партиции, файловые системы, монтирование"
+license: "CC BY"
+lang: ru-RU
+
+format:
+  beamer:
+    pdf-engine: xelatex
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    toc: false
+    number-sections: false
+    colorlinks: false
+    slide_level: 2
+    aspectratio: 169
+    section-titles: false
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+  revealjs:
+    transition: slide
+    margin: 0.06
+    smaller: false
+    output-ext: html
+    theme: beige
+---
+
+# Информация
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+* Баранов Никита Дмитриевич  
+* студент группы НПИбд-02-24  
+* Российский университет дружбы народов  
+* [1132242977@pfur.ru](mailto:1132242977@pfur.ru)
+
+:::
+::: {.column width="30%"}
+
+![](./image/student.jpg)
+
+:::
+::::::::::::::
+
+# Цель работы
+
+Получить навыки создания разделов, файловых систем и монтирования в Linux.
+
+# Задание
+
+1. Добавить два диска в VirtualBox  
+2. Создать разделы MBR с **fdisk**  
+3. Создать логические разделы  
+4. Создать раздел подкачки  
+5. Создать разделы GPT с **gdisk**  
+6. Отформатировать XFS и EXT4  
+7. Смонтировать вручную и через `/etc/fstab`  
+8. Выполнить самостоятельное задание
+
+# Создание виртуальных носителей (2×512 MB)
+
+![](image/1.png){width=100%}
+
+# Информация о дисках в системе
+
+![](image/2.png){width=100%}
+
+# Справка по командам fdisk
+
+![](image/3.png){width=100%}
+
+# Создание основного раздела (100 MB)
+
+![](image/4.png){width=100%}
+
+# Проверка и запись изменений
+
+![](image/5.png){width=100%}
+
+# Создание расширенного и логического раздела
+
+![](image/6.png){width=100%}
+
+# Создание раздела подкачки (100 MB)
+
+![](image/7.png){width=100%}
+
+# Форматирование и активация swap
+
+![](image/8.png){width=100%}
+
+# Работа с GPT-разделами (gdisk)
+
+![](image/9.png){width=100%}
+
+# Проверка созданного GPT-раздела
+
+![](image/10.png){width=100%}
+
+# Форматирование /dev/sdb1 в XFS
+
+![](image/11.png){width=100%}
+
+# Форматирование /dev/sdb5 в EXT4
+
+![](image/12.png){width=100%}
+
+# Ручное монтирование раздела
+
+![](image/13.png){width=100%}
+
+# Автоматическое монтирование через /etc/fstab (часть 1)
+
+![](image/14.png){width=100%}
+
+# Автоматическое монтирование через /etc/fstab (часть 2)
+
+![](image/15.png){width=100%}
+
+# Проверка автоматического монтирования
+
+![](image/16.png){width=100%}
+
+# Создание дополнительных GPT-разделов
+
+![](image/17.png){width=100%}
+
+# Настройка /etc/fstab (часть 1)
+
+![](image/18.png){width=100%}
+
+# Настройка /etc/fstab (часть 2)
+
+![](image/19.png){width=100%}
+
+# Выводы
+
+* Получены навыки работы с **fdisk** и **gdisk**  
+* Созданы и отформатированы разделы (XFS, EXT4, swap)  
+* Настроено ручное и автоматическое монтирование  
+* Освоена работа с таблицами разделов MBR и GPT
+
